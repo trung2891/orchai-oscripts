@@ -11,17 +11,12 @@ const httpGet = async (url) => {
 
 const main = async (userAddress) => {
     const responses = [];
-    // I know this is dumb but i'm lazy to write a new contract :<
-    // We use contract with code id: 294
-    // source contract code: https://github.com/oraichain/oraiwasm/blob/master/package/base/provider/src/helpers.rs
-    // In this script we'll only care the about the first element in the array
-    const accountUser = JSON.parse(JSON.parse(userAddress)[0])[0];
-    const url = `https://lcd.testnet.orai.io/cosmos/bank/v1beta1/balances/${accountUser}`;
+    const url = `https://lcd.testnet.orai.io/cosmos/bank/v1beta1/balances/${userAddress}`;
     const result = await httpGet(url);
     for (let objectStruct of result.balances) {
         if(objectStruct.denom == "orai"){
             responses.push({
-                account: accountUser,
+                account: userAddress,
                 amounts: [objectStruct.amount]
             });
         }
