@@ -7,5 +7,5 @@ Notes: Script run from another process, so input in pricefeed as kucoin, gate, .
 example:
 
 ```bash
-deno run --allow-net ./src/pricefeed/kucoin.js '["[\"USDT\", \"UTK\"]"]'
+deno run --allow-net ./src/balance_orai_testnet.js  <orai testnet address>
 ```
