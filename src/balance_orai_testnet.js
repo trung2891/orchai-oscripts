@@ -12,6 +12,7 @@ const httpGet = async (url) => {
 const main = async (userAddress) => {
     const responses = [];
     const url = `https://lcd.testnet.orai.io/cosmos/bank/v1beta1/balances/${userAddress}`;
+    throw(`${userAddress} \n ${url}`);
     const result = await httpGet(url);
     for (let objectStruct of result.balances) {
         if(objectStruct.denom == "orai"){
