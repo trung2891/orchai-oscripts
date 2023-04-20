@@ -10,8 +10,9 @@ const httpGet = async (url) => {
 */
 
 
-const main = async (userAddress) => {
+const main = async (input) => {
     const responses = [];
+    let userAddress = JSON.parse(input)[0];
     const url = `https://lcd.testnet.orai.io/cosmos/staking/v1beta1/delegations/${userAddress}`;
     const result = await httpGet(url);
     for (let objectStruct of result.delegation_responses) {
