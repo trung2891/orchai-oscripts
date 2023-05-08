@@ -9,19 +9,18 @@ const httpGet = async (url) => {
 * @params {string} '["[\"orai1u0vfsjqh0uztlmlwv9cswggn5xkvrt4sayaxme\"]"]'
 */
 
+
 const main = async (input) => {
     const responses = [];
-    let userAccount = JSON.parse(input)[0];
-    const url = `https://lcd.testnet.orai.io/cosmos/bank/v1beta1/balances/${userAccount}`;
+    let userAddress = JSON.parse(input)[0];
+    const url = `https://rest.cosmos.directory/cosmoshub/cosmos/staking/v1beta1/delegations/${userAddress}`;
     const result = await httpGet(url);
-    for (let objectStruct of result.balances) {
-        if(objectStruct.denom == "orai"){
-            responses.push({
-                account: userAccount,
-                amounts: [Number(objectStruct.amount).toFixed(8).toString()]
-            });
-        }
-    }   
+    for (let objectStruct of result.delegation_responses) {
+        responses.push({
+            account: objectStruct.delegation.validator_address,
+            amounts: [Number(objectStruct.balance.amount).toFixed(8).toString()]
+        });
+    }
     console.log(JSON.stringify(responses))
 };
 

@@ -18,7 +18,7 @@ const main = async (input) => {
     for (let objectStruct of result.delegation_responses) {
         responses.push({
             account: objectStruct.delegation.validator_address,
-            amounts: [objectStruct.balance.amount]
+            amounts: [Number(objectStruct.balance.amount).toFixed(8).toString()]
         });
     }
     console.log(JSON.stringify(responses))
